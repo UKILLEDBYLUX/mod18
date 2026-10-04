@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: unzip -o armorindicator.zip -d project
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -15,7 +16,8 @@ jobs:
         with:
           gradle-version: "8.12"
       - run: gradle build --no-daemon
+        working-directory: project
       - uses: actions/upload-artifact@v4
         with:
           name: armorindicator
-          path: build/libs/*.jar
+          path: project/build/libs/*.jar
